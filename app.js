@@ -370,7 +370,7 @@
 
       if (badgeLuasEl) badgeLuasEl.textContent = `${strA} m²`;
       if (txtTotalPenontonEl) txtTotalPenontonEl.textContent = strTotalPenonton;
-      if (txtUnitPenontonEl) txtUnitPenontonEl.textContent = 'ORANG / JIWA';
+      if (txtUnitPenontonEl) txtUnitPenontonEl.textContent = 'ORANG';
       if (txtFormulaProofEl) txtFormulaProofEl.textContent = `${strA} m² × ${strD} = ${strTotalPenonton} orang`;
     } else {
       state.totalPenonton = null;
@@ -388,7 +388,7 @@
     if (state.totalPelakuSeni !== null && state.totalPelakuSeni >= 0) {
       const strTotalPelaku = formatIDRNumber(state.totalPelakuSeni);
       if (txtTotalPelakuEl) txtTotalPelakuEl.textContent = strTotalPelaku;
-      if (txtUnitPelakuEl) txtUnitPelakuEl.textContent = 'ORANG / SENIMAN';
+      if (txtUnitPelakuEl) txtUnitPelakuEl.textContent = 'ORANG';
       if (txtDescPelakuEl) txtDescPelakuEl.textContent = 'Pemeran Utama, Pendukung, Pemusik';
     } else {
       if (txtTotalPelakuEl) txtTotalPelakuEl.textContent = '-';
@@ -425,7 +425,7 @@
 • Luas Area Efektif (A) : ${strA} m²
 • Kepadatan Penonton (D): ${strD} orang/m² (${state.densityTitle})
 • Perhitungan Rumus     : ${strA} m² × ${strD} = *${strTotalPenonton} Orang*
-👉 *Estimasi Jumlah Penonton Pertunjukan Seni / Kebudayaan: ${strTotalPenonton} Orang / Jiwa*`;
+👉 *Estimasi Jumlah Penonton Pertunjukan Seni / Kebudayaan: ${strTotalPenonton} Orang*`;
     } else {
       blokPenonton =
 `🌳 *I. ESTIMASI PENONTON (Metode Jacobs: P = A × D)*
@@ -552,7 +552,7 @@ _Dihitung melalui instrumen bantu Takar Budaya._`;
           </div>
           <div class="pdf-banner-total">
             <span>Estimasi Jumlah Penonton Pertunjukan Seni / Kebudayaan:</span>
-            <strong>${strTotalPenonton} ORANG / JIWA</strong>
+            <strong>${strTotalPenonton} ORANG</strong>
           </div>
         </div>
       `;
@@ -605,7 +605,7 @@ _Dihitung melalui instrumen bantu Takar Budaya._`;
         <div class="pdf-result-card">
           <div class="pdf-banner-total" style="border-top: none; padding-top: 0;">
             <span>Estimasi Jumlah Pelaku / Pendukung Pertunjukan Seni:</span>
-            <strong>${strTotalPelaku} ORANG / SENIMAN</strong>
+            <strong>${strTotalPelaku} ORANG</strong>
           </div>
         </div>
       `;

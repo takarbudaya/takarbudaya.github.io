@@ -43,6 +43,11 @@
   padding: 0;
 }
 
+html, body {
+  /* Mencegah double-tap to zoom yang tidak disengaja, namun tetap mengizinkan pinch-zoom 2 jari */
+  touch-action: manipulation;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-main);
@@ -52,6 +57,11 @@ body {
   overflow-x: hidden;
   position: relative;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Tombol dan input interaktif agar responsif tanpa delay tap 300ms dan tanpa zoom kaget */
+button, input, select, textarea, .select-card, .quick-btn, .counter-btn {
+  touch-action: manipulation;
 }
 
 /* Latar Belakang Tradisional Bersahaja (Bebas Efek Cahaya Neon) */
