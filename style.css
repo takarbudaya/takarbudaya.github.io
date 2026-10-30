@@ -1,0 +1,931 @@
+/* ==========================================================================
+   TAKAR BUDAYA - TRADISIONAL JAWA HERITAGE (SEDERHANA, TENANG, MATTE & ELEGAN)
+   Nuansa: Kayu Jati Tua, Batik Sogan Alami, & Perunggu/Emas Antik Keraton
+   Bebas Kilau Neon: Dibuat Teduh, Sejuk di Mata, dan Sangat Mudah Dipahami
+   Responsif: HP (Mobile), Tablet, & Laptop / Komputer
+   ========================================================================== */
+
+:root {
+  /* Palet Warna Jawa Klasik (Matte, Hangat, Tanpa Efek Neon) */
+  --bg-main: #130d08;                /* Cokelat Kayu Jati Gelap Teduh */
+  --bg-card: #1c130b;                /* Sogan Klasik Matang */
+  --bg-card-hover: #23180f;          /* Sogan Lembut */
+  --bg-card-active: #271a10;         /* Kartu Pilihan Terpilih */
+  --bg-input: #160e08;               /* Bidang Isian */
+
+  /* Warna Aksen Tradisional (Emas Antik & Perunggu Keraton) */
+  --gold-prada: #a87a40;             /* Emas Kuno / Perunggu Tenang */
+  --gold-light: #cf9e5f;             /* Emas Terang Teduh (Bukan Kuning Terang) */
+  --gold-subtle: rgba(168, 122, 64, 0.12);
+
+  /* Warna Teks yang Ramah & Nyaman di Mata */
+  --text-main: #f2ece4;              /* Putih Gading Alami */
+  --text-muted: #b8a490;             /* Krem Sogan Lembut */
+  --text-dim: #7d6b5b;               /* Cokelat Tua Muted */
+
+  /* Garis Batas Matte Halus */
+  --border-subtle: rgba(168, 122, 64, 0.20);
+  --border-active: #a87a40;          /* Aksen Perunggu Halus */
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heritage: 'Cinzel', serif;
+}
+
+/* Reset Dasar */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Latar Belakang Tradisional Bersahaja (Bebas Efek Cahaya Neon) */
+.jawa-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: #130d08;
+}
+
+/* Ornamen Batik Kawung Halus & Samar di Latar */
+.kawung-watermark {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: radial-gradient(circle at center, #cf9e5f 1px, transparent 1px),
+                    radial-gradient(circle at center, #cf9e5f 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+}
+
+/* Pembungkus Utama Konten */
+.main-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 24px 16px 80px 16px;
+}
+
+/* ==========================================================================
+   HEADER APLIKASI
+   ========================================================================== */
+.app-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.jawa-aksara-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-subtle);
+  border: 1px solid var(--border-subtle);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 10px;
+}
+
+.jawa-aksara-badge .ornament {
+  color: var(--gold-prada);
+  font-size: 13px;
+}
+
+.jawa-aksara-badge .aksara-text {
+  font-size: 15px;
+  color: var(--gold-light);
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.main-title {
+  font-family: var(--font-heritage);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-main);
+  margin-bottom: 3px;
+}
+
+.main-acronym {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.main-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.formula-tag {
+  display: inline-block;
+  background: #18100a;
+  border: 1px solid var(--border-subtle);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+}
+
+.formula-tag code {
+  color: var(--gold-light);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   KARTU FORMULIR (FORM CARD)
+   ========================================================================== */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+}
+
+.card-title-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background: #25180f;
+  border: 1px solid var(--gold-prada);
+  color: var(--gold-light);
+  font-weight: 700;
+  font-size: 12.5px;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Form Grid Identitas Acara (5 Input: Tanggal, Tempat, Acara, Penyelenggara, Admin) */
+.form-grid-identitas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .form-grid-identitas {
+    grid-template-columns: 1fr 1fr;
+  }
+  .field-span-full {
+    grid-column: span 2;
+  }
+}
+
+/* Form Grid 3 Kolom */
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .form-grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.field-item label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+
+.text-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 13.5px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.text-input:focus {
+  border-color: var(--gold-prada);
+}
+
+/* Tombol Cepat Pilihan Luas */
+.quick-buttons-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 480px) {
+  .quick-buttons-row {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.quick-btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 9px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.quick-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-main);
+  border-color: var(--border-subtle);
+}
+
+.quick-btn.active {
+  background: #2b1c11;
+  border-color: var(--gold-prada);
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+/* Kotak Input Kustom Luas */
+.custom-area-box {
+  display: none;
+  background: #170f09;
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.sub-toggle-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.sub-tab {
+  flex: 1;
+  background: #20140c;
+  border: 1px solid var(--border-subtle);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sub-tab.active {
+  background: var(--gold-prada);
+  color: #130d08;
+  border-color: var(--gold-prada);
+  font-weight: 700;
+}
+
+.input-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.input-single {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Banner Luas Terpilih */
+.active-val-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #160e08;
+  border: 1px solid var(--border-subtle);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.active-val-banner strong {
+  color: var(--gold-light);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   KARTU PILIHAN SELEKSI (D, T, C) - RINGKAS, TENANG & NYAMAN DIBACA
+   ========================================================================== */
+.selection-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.select-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #18100a;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.select-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(168, 122, 64, 0.35);
+}
+
+.select-card.active {
+  background: var(--bg-card-active);
+  border-color: var(--gold-prada);
+}
+
+.select-indicator {
+  width: 17px;
+  height: 17px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.select-card.active .select-indicator {
+  border-color: var(--gold-prada);
+  background: var(--gold-prada);
+}
+
+.select-card.active .select-indicator::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: #130d08;
+}
+
+.select-body {
+  flex: 1;
+}
+
+.select-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.select-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.select-card.active .select-title {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.val-pill {
+  display: inline-block;
+  background: #20140b;
+  border: 1px solid var(--border-subtle);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.select-card.active .val-pill {
+  background: #2e1d11;
+  border-color: var(--gold-prada);
+  color: var(--gold-light);
+}
+
+.select-note {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   BAGIAN PEMISAH & INPUT PELAKU SENI (1 HALAMAN TERPADU)
+   ========================================================================== */
+.section-divider-title {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 2px;
+}
+
+.section-divider-title span {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--gold-light);
+  background: #1c130b;
+  border: 1px solid var(--border-subtle);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+.pelaku-input-wrap {
+  background: #160e08;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+  text-align: center;
+}
+
+.pelaku-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* Stepper Counter Modern & Elegan */
+.pelaku-counter-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #110b06;
+  border: 1.5px solid var(--border-active);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  margin-bottom: 8px;
+}
+
+.counter-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(168, 122, 64, 0.3);
+  background: #23170e;
+  color: var(--gold-light);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.counter-btn:hover {
+  background: var(--gold-prada);
+  color: #130d08;
+  border-color: var(--gold-prada);
+  transform: translateY(-1px);
+}
+
+.counter-btn:active {
+  transform: translateY(1px);
+}
+
+.counter-input-group {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 12px;
+  min-width: 130px;
+}
+
+.counter-field {
+  width: 75px;
+  background: transparent;
+  border: none;
+  color: #f7f2ea;
+  font-family: var(--font-heritage);
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  padding: 0;
+  line-height: 1;
+  -moz-appearance: textfield;
+}
+
+.counter-field::-webkit-inner-spin-button,
+.counter-field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.counter-unit {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-light);
+  user-select: none;
+}
+
+.pelaku-subtext {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-dim);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+/* Kotak Hasil Ganda di Sticky Card */
+.dual-result-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 540px) {
+  .dual-result-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.result-sub-box {
+  background: #18100a;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 10px;
+  text-align: center;
+}
+
+.result-sub-box .result-header-text {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.8px;
+}
+
+.result-sub-box .result-big-number {
+  font-size: 30px;
+  margin: 2px 0;
+}
+
+.result-sub-box .calc-proof-box {
+  margin-bottom: 0;
+  padding: 4px 6px;
+}
+
+.result-sub-box .proof-math {
+  font-size: 11.5px;
+}
+
+/* ==========================================================================
+   KARTU HASIL AKHIR (STICKY, TENANG, MATTE & ELEGAN)
+   ========================================================================== */
+.result-sticky-card {
+  position: sticky;
+  bottom: 12px;
+  z-index: 10;
+  background: #1f140c;
+  border: 1px solid var(--gold-prada);
+  border-radius: var(--radius-md);
+  padding: 16px 14px;
+}
+
+.result-inner {
+  text-align: center;
+}
+
+.result-header-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.result-big-number {
+  font-family: var(--font-heritage);
+  font-size: 40px;
+  font-weight: 700;
+  color: #f7f1e6;
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+.result-unit-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+/* Kotak Pembuktian Rumus */
+.calc-proof-box {
+  background: #160e08;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  margin-bottom: 12px;
+}
+
+.proof-label {
+  display: block;
+  font-size: 10.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1px;
+}
+
+.proof-math {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+/* Tombol Aksi */
+.action-btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-wa {
+  background: #1e5235;
+  color: #ffffff;
+}
+
+.btn-wa:hover {
+  background: #256641;
+}
+
+.btn-print {
+  background: #6e4620;
+  color: #f7f2ea;
+}
+
+.btn-print:hover {
+  background: #805226;
+}
+
+.btn-icon {
+  font-size: 14px;
+}
+
+/* Toast Notifikasi Salin */
+.toast-box {
+  margin-top: 10px;
+  background: #173824;
+  border: 1px solid #287a4c;
+  color: #d1fae5;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Footer Sederhana */
+.app-footer {
+  text-align: center;
+  margin-top: 36px;
+  color: var(--text-dim);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.footer-aksara {
+  color: var(--gold-prada);
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.footer-sub {
+  font-size: 10.5px;
+  margin-top: 3px;
+  color: #635345;
+}
+
+/* ==========================================================================
+   FORMAT CETAK PDF LAPORAN RESMI (A4, UKURAN FONT STANDAR LAPORAN 10-11PT)
+   ========================================================================== */
+.print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 12mm 15mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.3 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .jawa-bg,
+  .main-wrapper {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .pdf-header {
+    text-align: center;
+    margin-bottom: 8pt;
+  }
+
+  .pdf-title {
+    font-size: 14pt;
+    font-weight: bold;
+    letter-spacing: 1pt;
+    color: #111111;
+    margin-bottom: 1pt;
+  }
+
+  .pdf-subtitle {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 1pt;
+  }
+
+  .pdf-meta-method {
+    font-size: 8.5pt;
+    color: #555555;
+    margin-bottom: 6pt;
+  }
+
+  .pdf-divider {
+    border-bottom: 1.5pt solid #222222;
+    margin-top: 3pt;
+    margin-bottom: 8pt;
+  }
+
+  .pdf-table-info {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8pt;
+    font-size: 9pt;
+  }
+
+  .pdf-table-info td {
+    padding: 1.5pt 2pt;
+    vertical-align: top;
+  }
+
+  .pdf-section-title {
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #111111;
+    border-bottom: 1pt solid #444444;
+    padding-bottom: 2pt;
+    margin-top: 8pt;
+    margin-bottom: 5pt;
+  }
+
+  .pdf-table-data {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 6pt;
+    font-size: 8.5pt;
+  }
+
+  .pdf-table-data th,
+  .pdf-table-data td {
+    border: 0.75pt solid #888888;
+    padding: 3.5pt 6pt;
+    vertical-align: middle;
+  }
+
+  .pdf-table-data th {
+    background-color: #f2f2f2 !important;
+    font-weight: bold;
+    color: #000000;
+  }
+
+  .pdf-result-card {
+    border: 1pt solid #333333;
+    background-color: #fafafa !important;
+    padding: 6pt 10pt;
+    margin-top: 4pt;
+    margin-bottom: 8pt;
+    border-radius: 4pt;
+  }
+
+  .pdf-calc-line {
+    font-size: 9pt;
+    color: #222222;
+    margin-bottom: 4pt;
+  }
+
+  .pdf-banner-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1pt dashed #777777;
+    padding-top: 4pt;
+    font-size: 9.5pt;
+    font-weight: bold;
+  }
+
+  .pdf-banner-total strong {
+    font-size: 11.5pt;
+    color: #000000;
+  }
+
+  .pdf-footer-note {
+    margin-top: 10pt;
+    border-top: 0.75pt solid #cccccc;
+    padding-top: 6pt;
+    font-size: 8pt;
+    color: #444444;
+  }
+}

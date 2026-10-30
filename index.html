@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAKAR BUDAYA - Tata Kalkulasi Partisipasi Budaya</title>
+  <meta name="description" content="Instrumen praktis penghitungan estimasi penonton (Metode Herbert Jacobs) dan pelaku seni / kebudayaan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Latar Belakang Tradisional Jawa (Matte Sogan & Kayu Jati, Tanpa Neon) -->
+  <div class="jawa-bg">
+    <div class="kawung-watermark"></div>
+  </div>
+
+  <div class="main-wrapper">
+    <!-- Header Aplikasi -->
+    <header class="app-header">
+      <div class="jawa-aksara-badge">
+        <span class="ornament">꧁</span>
+        <span class="aksara-text">ꦠꦏꦂꦧꦸꦢꦪ</span>
+        <span class="ornament">꧂</span>
+      </div>
+      <h1 class="main-title">TAKAR BUDAYA</h1>
+      <p class="main-acronym">Tata Kalkulasi Partisipasi Budaya</p>
+      <p class="main-subtitle">Instrumen Penghitungan Penonton &amp; Pelaku Seni / Kebudayaan</p>
+      <div class="formula-tag">
+        <code id="headerMethodBadge">Metode Jacobs (P = A &times; D) &bull; Kategori Peran Pelaku Seni</code>
+      </div>
+    </header>
+
+    <main class="content-container">
+      <!-- KARTU 1: IDENTITAS ACARA -->
+      <section class="form-card">
+        <div class="card-title-group">
+          <span class="step-badge">1</span>
+          <div>
+            <h2 class="card-title">Informasi Acara Kebudayaan</h2>
+            <p class="card-desc">Identitas kegiatan untuk pesan WhatsApp &amp; laporan resmi PDF</p>
+          </div>
+        </div>
+
+        <div class="form-grid-identitas">
+          <div class="field-item">
+            <label for="tglAcara">Tanggal</label>
+            <input type="date" id="tglAcara" class="text-input">
+          </div>
+          <div class="field-item">
+            <label for="tempatAcara">Tempat / Lokasi</label>
+            <input type="text" id="tempatAcara" class="text-input" placeholder="Contoh: Lapangan Denggung / Pendopo">
+          </div>
+          <div class="field-item">
+            <label for="namaAcara">Nama Acara</label>
+            <input type="text" id="namaAcara" class="text-input" placeholder="Contoh: Pentas Wayang Kulit">
+          </div>
+          <div class="field-item">
+            <label for="penyelenggaraAcara">Penyelenggara</label>
+            <input type="text" id="penyelenggaraAcara" class="text-input" placeholder="Contoh: Dinas Kebudayaan">
+          </div>
+          <div class="field-item field-span-full">
+            <label for="bidangPelaksana">Bidang / UPTD Pelaksana</label>
+            <input type="text" id="bidangPelaksana" class="text-input" placeholder="Contoh: Bidang Sejarah / UPTD Taman Budaya">
+          </div>
+        </div>
+      </section>
+
+      <!-- BAGIAN: HITUNG PENONTON (METODE JACOBS) -->
+      <div class="section-divider-title">
+        <span>🌳 I. HITUNG PENONTON (METODE JACOBS: P = A &times; D)</span>
+      </div>
+
+      <!-- KARTU 2: Parameter A (Luas Area) -->
+      <section class="form-card">
+        <div class="card-title-group">
+          <span class="step-badge">A</span>
+          <div>
+            <h2 class="card-title">Luas Area Penonton (A)</h2>
+            <p class="card-desc">Pilih ukuran cepat atau masukkan ukuran luas area efektif</p>
+          </div>
+        </div>
+
+        <!-- Tombol Cepat Luas (Klik untuk pilih, klik lagi untuk batal) -->
+        <div class="quick-buttons-row" id="quickAreaGroup">
+          <button type="button" class="quick-btn" data-area="300">300 m&sup2;</button>
+          <button type="button" class="quick-btn" data-area="500">500 m&sup2;</button>
+          <button type="button" class="quick-btn" data-area="700">700 m&sup2;</button>
+          <button type="button" class="quick-btn" data-area="1000">1.000 m&sup2;</button>
+          <button type="button" class="quick-btn" data-area="custom">Ketik Sendiri &hellip;</button>
+        </div>
+
+        <!-- Input Manual Luas -->
+        <div class="custom-area-box" id="customAreaBox">
+          <div class="sub-toggle-tabs">
+            <button type="button" class="sub-tab active" id="tabModePL">Panjang &times; Lebar</button>
+            <button type="button" class="sub-tab" id="tabModeTotal">Total Luas (m&sup2;)</button>
+          </div>
+
+          <div id="panelPL" class="input-duo">
+            <div class="field-item">
+              <label for="inputPanjang">Panjang (meter)</label>
+              <input type="number" id="inputPanjang" class="text-input" placeholder="0" min="1" step="1">
+            </div>
+            <div class="field-item">
+              <label for="inputLebar">Lebar (meter)</label>
+              <input type="number" id="inputLebar" class="text-input" placeholder="0" min="1" step="1">
+            </div>
+          </div>
+
+          <div id="panelTotal" class="input-single hidden">
+            <div class="field-item">
+              <label for="inputTotalLuas">Total Luas Lokasi (m&sup2;)</label>
+              <input type="number" id="inputTotalLuas" class="text-input" placeholder="0" min="1" step="10">
+            </div>
+          </div>
+        </div>
+
+        <!-- Indikator Luas Terpilih -->
+        <div class="active-val-banner">
+          <span>Luas Lokasi Terhitung (A):</span>
+          <strong id="badgeLuas">Belum diisi / Tidak dihitung</strong>
+        </div>
+      </section>
+
+      <!-- KARTU 3: Parameter D (Kepadatan Penonton) -->
+      <section class="form-card">
+        <div class="card-title-group">
+          <span class="step-badge">D</span>
+          <div>
+            <h2 class="card-title">Kepadatan Penonton per m&sup2; (D)</h2>
+            <p class="card-desc">Perkiraan kerapatan posisi penonton di lokasi acara</p>
+          </div>
+        </div>
+
+        <div class="selection-grid" id="groupDensity">
+          <div class="select-card" data-val="0.5">
+            <div class="select-indicator"></div>
+            <div class="select-body">
+              <div class="select-header">
+                <span class="select-title">Senggang / Lesehan</span>
+                <span class="val-pill">0,5 org/m&sup2;</span>
+              </div>
+              <p class="select-note">Lesehan santai, ruang gerak lega 1–2 meter antarorang.</p>
+            </div>
+          </div>
+
+          <div class="select-card active" data-val="1.0">
+            <div class="select-indicator"></div>
+            <div class="select-body">
+              <div class="select-header">
+                <span class="select-title">Sedang / Nyaman (Aman)</span>
+                <span class="val-pill">1,0 org/m&sup2;</span>
+              </div>
+              <p class="select-note">Kondisi normal wajar, penonton leluasa tanpa berdesakan.</p>
+            </div>
+          </div>
+
+          <div class="select-card" data-val="2.0">
+            <div class="select-indicator"></div>
+            <div class="select-body">
+              <div class="select-header">
+                <span class="select-title">Berdiri Berdekatan</span>
+                <span class="val-pill">2,0 org/m&sup2;</span>
+              </div>
+              <p class="select-note">Berdiri berdekatan sejangkauan tangan, tanpa desak-desakan.</p>
+            </div>
+          </div>
+
+          <div class="select-card" data-val="3.0">
+            <div class="select-indicator"></div>
+            <div class="select-body">
+              <div class="select-header">
+                <span class="select-title">Padat</span>
+                <span class="val-pill">3,0 org/m&sup2;</span>
+              </div>
+              <p class="select-note">Bahu sesekali bersentuhan.</p>
+            </div>
+          </div>
+
+          <div class="select-card" data-val="4.0">
+            <div class="select-indicator"></div>
+            <div class="select-body">
+              <div class="select-header">
+                <span class="select-title">Sangat Padat</span>
+                <span class="val-pill">4,0 org/m&sup2;</span>
+              </div>
+              <p class="select-note">Kondisi berdesakan padat.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BAGIAN: HITUNG PELAKU SENI / KEBUDAYAAN -->
+      <div class="section-divider-title">
+        <span>🎭 II. HITUNG PELAKU SENI / KEBUDAYAAN</span>
+      </div>
+
+      <!-- KARTU 4: HITUNG PELAKU SENI -->
+      <section class="form-card">
+        <div class="card-title-group">
+          <span class="step-badge">2</span>
+          <div>
+            <h2 class="card-title">Jumlah Pelaku Seni / Kebudayaan</h2>
+            <p class="card-desc">Akumulasi jumlah pemeran utama, pemain pendukung, dan pemusik</p>
+          </div>
+        </div>
+
+        <div class="quick-buttons-row" id="quickPelakuGroup">
+          <button type="button" class="quick-btn" data-count="10">10 Orang</button>
+          <button type="button" class="quick-btn" data-count="20">20 Orang</button>
+          <button type="button" class="quick-btn" data-count="30">30 Orang</button>
+          <button type="button" class="quick-btn" data-count="50">50 Orang</button>
+          <button type="button" class="quick-btn" data-count="100">100 Orang</button>
+        </div>
+
+        <div class="pelaku-input-wrap">
+          <label for="inputPelakuSeni" class="pelaku-label">Masukkan Jumlah Pelaku Seni / Kebudayaan:</label>
+          <div class="pelaku-counter-box">
+            <button type="button" class="counter-btn" id="btnPelakuMinus" aria-label="Kurangi 1 pelaku seni">&minus;</button>
+            <div class="counter-input-group">
+              <input type="number" id="inputPelakuSeni" class="counter-field" placeholder="0" min="0" step="1">
+              <span class="counter-unit">Orang</span>
+            </div>
+            <button type="button" class="counter-btn" id="btnPelakuPlus" aria-label="Tambah 1 pelaku seni">&plus;</button>
+          </div>
+          <p class="pelaku-subtext">Akumulasi terdata dari Pemeran Utama, Pemain Pendukung, dan Pemusik (Dapat dikosongi jika tidak ada)</p>
+        </div>
+      </section>
+
+      <!-- KARTU HASIL: REKAPITULASI DUA MODUL (BERDIRI SENDIRI) -->
+      <section class="result-sticky-card">
+        <div class="result-inner">
+          <div class="dual-result-grid">
+            <!-- Box Hasil Penonton -->
+            <div class="result-sub-box">
+              <div class="result-header-text">ESTIMASI PENONTON</div>
+              <div class="result-big-number" id="txtTotalPenonton">-</div>
+              <div class="result-unit-label" id="txtUnitPenonton">(TIDAK DIHITUNG)</div>
+              <div class="calc-proof-box">
+                <span class="proof-label">Metode Jacobs: P = A &times; D</span>
+                <div class="proof-math" id="txtFormulaProof">Penonton tidak dihitung / tidak ada</div>
+              </div>
+            </div>
+
+            <!-- Box Hasil Pelaku Seni -->
+            <div class="result-sub-box">
+              <div class="result-header-text">PELAKU SENI / BUDAYA</div>
+              <div class="result-big-number" id="txtTotalPelaku">-</div>
+              <div class="result-unit-label" id="txtUnitPelaku">(TIDAK DIHITUNG)</div>
+              <div class="calc-proof-box">
+                <span class="proof-label">Kategori Peran (Clustering)</span>
+                <div class="proof-math" id="txtDescPelaku">Pelaku seni tidak dihitung / tidak ada</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tombol Aksi Praktis -->
+          <div class="action-btn-row">
+            <button type="button" class="action-btn btn-wa" id="btnSalinWA">
+              <span class="btn-icon">📋</span>
+              <span>Salin Pesan WhatsApp</span>
+            </button>
+            <button type="button" class="action-btn btn-print" id="btnCetakPDF">
+              <span class="btn-icon">🖨️</span>
+              <span>Cetak / Simpan PDF</span>
+            </button>
+          </div>
+
+          <!-- Toast Notifikasi -->
+          <div class="toast-box hidden" id="toastCopy">
+            ✅ Ringkasan berhasil disalin! Siap ditempel di WhatsApp.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Tradisional Sederhana -->
+    <footer class="app-footer">
+      <div class="footer-aksara">꧁ ꦠꦏꦂꦧꦸꦢꦪ ꧂</div>
+      <p>Takar Budaya &copy; 2026 &bull; Tata Kalkulasi Partisipasi Budaya.</p>
+      <p class="footer-sub">Instrumen Penghitungan Penonton (Metode Jacobs) &amp; Pelaku Seni / Kebudayaan.</p>
+    </footer>
+  </div>
+
+  <!-- ==========================================================================
+       DOKUMEN CETAK PDF LAPORAN RESMI (UKURAN FONT STANDAR LAPORAN A4)
+       ========================================================================== -->
+  <div id="printSheet" class="print-only">
+    <div class="pdf-header">
+      <div class="pdf-title">TAKAR BUDAYA</div>
+      <div class="pdf-subtitle">Penonton Pertunjukan Seni / Kebudayaan &amp; Pelaku / Pendukung Pertunjukan Seni</div>
+      <div class="pdf-meta-method" id="pdfMetaMethod">Metode Ilmiah: Herbert Jacobs (1967) &bull; Kategori Peran Pelaku Seni</div>
+      <div class="pdf-divider"></div>
+    </div>
+
+    <!-- Data Identitas Acara -->
+    <table class="pdf-table-info">
+      <tr>
+        <td style="width: 25%;"><strong>Tanggal Pelaksanaan</strong></td>
+        <td style="width: 2%;">:</td>
+        <td style="width: 73%;" id="pdfTglAcara">-</td>
+      </tr>
+      <tr>
+        <td><strong>Tempat / Lokasi</strong></td>
+        <td>:</td>
+        <td id="pdfTempatAcara">-</td>
+      </tr>
+      <tr>
+        <td><strong>Nama Acara Budaya</strong></td>
+        <td>:</td>
+        <td id="pdfNamaAcara">-</td>
+      </tr>
+      <tr>
+        <td><strong>Penyelenggara</strong></td>
+        <td>:</td>
+        <td id="pdfPenyelenggaraAcara">-</td>
+      </tr>
+      <tr>
+        <td><strong>Bidang / UPTD Pelaksana</strong></td>
+        <td>:</td>
+        <td id="pdfBidangPelaksana">-</td>
+      </tr>
+    </table>
+
+    <!-- Kontainer Dinamis Bagian Laporan PDF -->
+    <div id="pdfDynamicContent"></div>
+
+    <div class="pdf-footer-note">
+      <div><strong>Rujukan Metodologi:</strong></div>
+      <div>1. Estimasi Penonton (Metode Jacobs): Herbert Jacobs (1967), <em>To Count a Crowd</em>, UC Berkeley (Rumus: P = A &times; D).</div>
+      <div>2. Penghitungan Pelaku Seni: Akumulasi Pemeran Utama, Pemain Pendukung, dan Pemusik.</div>
+      <div style="margin-top: 4pt; color: #555555; font-size: 8.5pt;">Dokumen ini merupakan hasil ekspor instrumen bantu kalkulator <strong>Takar Budaya</strong>.</div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
