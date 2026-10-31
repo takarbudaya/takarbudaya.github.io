@@ -101,6 +101,19 @@
     const inputBidang = el('bidangPelaksana');
 
     if (inputTgl) {
+      const openDatePicker = () => {
+        try {
+          if (typeof inputTgl.showPicker === 'function') {
+            inputTgl.showPicker();
+          }
+        } catch (err) {
+          // ignore jika tidak didukung
+        }
+      };
+
+      inputTgl.addEventListener('click', openDatePicker);
+      inputTgl.addEventListener('focus', openDatePicker);
+
       inputTgl.addEventListener('change', (e) => {
         state.tglAcara = e.target.value;
       });
@@ -272,36 +285,11 @@
     }
   }
 
-  // --- KONTROL HITUNG PELAKU SENI / KEBUDAYAAN ---
+  // --- KONTROL HITUNG PELAKU SENI / KEBUDAYAAN (INPUT KETIK SENDIRI) ---
   function bindPelakuControls() {
-    const quickBtns = document.querySelectorAll('#quickPelakuGroup .quick-btn');
     const inputPelaku = el('inputPelakuSeni');
     const btnMinus = el('btnPelakuMinus');
     const btnPlus = el('btnPelakuPlus');
-
-    quickBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const isAlreadyActive = btn.classList.contains('active');
-
-        // Jika tombol sudah aktif, klik sekali lagi untuk UNCHECK / BATALKAN
-        if (isAlreadyActive) {
-          btn.classList.remove('active');
-          state.totalPelakuSeni = null;
-          if (inputPelaku) inputPelaku.value = '';
-          recalculateAll();
-          return;
-        }
-
-        // Jika belum aktif, aktifkan tombol ini dan nonaktifkan yang lain
-        quickBtns.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const count = parseInt(btn.getAttribute('data-count'), 10) || 0;
-        state.totalPelakuSeni = count;
-        if (inputPelaku) inputPelaku.value = count;
-        recalculateAll();
-      });
-    });
 
     if (inputPelaku) {
       inputPelaku.addEventListener('input', (e) => {
@@ -312,7 +300,6 @@
           const val = parseInt(text, 10);
           state.totalPelakuSeni = !isNaN(val) && val >= 0 ? val : null;
         }
-        syncQuickPelakuButtons(state.totalPelakuSeni);
         recalculateAll();
       });
     }
@@ -323,7 +310,6 @@
         const next = Math.max(0, curr - 1);
         state.totalPelakuSeni = next;
         if (inputPelaku) inputPelaku.value = next;
-        syncQuickPelakuButtons(next);
         recalculateAll();
       });
     }
@@ -334,19 +320,7 @@
         const next = curr + 1;
         state.totalPelakuSeni = next;
         if (inputPelaku) inputPelaku.value = next;
-        syncQuickPelakuButtons(next);
         recalculateAll();
-      });
-    }
-
-    function syncQuickPelakuButtons(val) {
-      quickBtns.forEach((b) => {
-        if (val === null || val === undefined || val === 0) {
-          b.classList.remove('active');
-        } else {
-          const btnVal = parseInt(b.getAttribute('data-count'), 10);
-          b.classList.toggle('active', btnVal === val);
-        }
       });
     }
   }

@@ -268,6 +268,21 @@ button, input, select, textarea, .select-card, .quick-btn, .counter-btn {
   border-color: var(--gold-prada);
 }
 
+/* Memudahkan klik tanggal di mana saja pada kotak */
+input[type="date"].text-input {
+  cursor: pointer;
+}
+
+input[type="date"].text-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.8) sepia(0.3) saturate(3) hue-rotate(350deg);
+  opacity: 0.85;
+}
+
+input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
 /* Tombol Cepat Pilihan Luas */
 .quick-buttons-row {
   display: grid;
