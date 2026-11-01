@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TAKAR BUDAYA - Tata Kalkulasi Partisipasi Budaya</title>
-  <meta name="description" content="Instrumen praktis penghitungan estimasi penonton (Metode Herbert Jacobs) dan pelaku seni / kebudayaan.">
+  <meta name="description" content="Instrumen praktis penghitungan penonton (Metode Herbert Jacobs) dan pelaku seni / pendukung.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
@@ -26,9 +26,9 @@
       </div>
       <h1 class="main-title">TAKAR BUDAYA</h1>
       <p class="main-acronym">Tata Kalkulasi Partisipasi Budaya</p>
-      <p class="main-subtitle">Instrumen Penghitungan Penonton &amp; Pelaku Seni / Kebudayaan</p>
+      <p class="main-subtitle">Instrumen Penghitungan Penonton &amp; Pelaku Seni / Pendukung</p>
       <div class="formula-tag">
-        <code id="headerMethodBadge">Metode Jacobs (P = A &times; D) &bull; Kategori Peran Pelaku Seni</code>
+        <code id="headerMethodBadge">Metode Jacobs (P = A &times; D) &bull; Kategori Peran Pelaku Seni / Pendukung</code>
       </div>
     </header>
 
@@ -38,7 +38,7 @@
         <div class="card-title-group">
           <span class="step-badge">1</span>
           <div>
-            <h2 class="card-title">Informasi Acara Kebudayaan</h2>
+            <h2 class="card-title">Informasi Acara</h2>
             <p class="card-desc">Identitas kegiatan untuk pesan WhatsApp &amp; laporan resmi PDF</p>
           </div>
         </div>
@@ -53,7 +53,7 @@
             <input type="text" id="tempatAcara" class="text-input" placeholder="Contoh: Lapangan Denggung / Pendopo">
           </div>
           <div class="field-item">
-            <label for="namaAcara">Nama Acara</label>
+            <label for="namaAcara">Acara</label>
             <input type="text" id="namaAcara" class="text-input" placeholder="Contoh: Pentas Wayang Kulit">
           </div>
           <div class="field-item">
@@ -192,23 +192,23 @@
         </div>
       </section>
 
-      <!-- BAGIAN: HITUNG PELAKU SENI / KEBUDAYAAN -->
+      <!-- BAGIAN: HITUNG PELAKU SENI / PENDUKUNG -->
       <div class="section-divider-title">
-        <span>🎭 II. HITUNG PELAKU SENI / KEBUDAYAAN</span>
+        <span>🎭 II. HITUNG PELAKU SENI / PENDUKUNG</span>
       </div>
 
-      <!-- KARTU 4: HITUNG PELAKU SENI -->
+      <!-- KARTU 4: HITUNG PELAKU SENI / PENDUKUNG -->
       <section class="form-card">
         <div class="card-title-group">
           <span class="step-badge">2</span>
           <div>
-            <h2 class="card-title">Jumlah Pelaku Seni / Kebudayaan</h2>
+            <h2 class="card-title">Jumlah Pelaku Seni / Pendukung</h2>
             <p class="card-desc">Akumulasi jumlah pemeran utama, pemain pendukung, dan pemusik</p>
           </div>
         </div>
 
         <div class="pelaku-input-wrap">
-          <label for="inputPelakuSeni" class="pelaku-label">Masukkan Jumlah Pelaku Seni / Kebudayaan:</label>
+          <label for="inputPelakuSeni" class="pelaku-label">Masukkan Jumlah Pelaku Seni / Pendukung:</label>
           <div class="pelaku-counter-box">
             <button type="button" class="counter-btn" id="btnPelakuMinus" aria-label="Kurangi 1 pelaku seni">&minus;</button>
             <div class="counter-input-group">
@@ -236,9 +236,9 @@
               </div>
             </div>
 
-            <!-- Box Hasil Pelaku Seni -->
+            <!-- Box Hasil Pelaku Seni / Pendukung -->
             <div class="result-sub-box">
-              <div class="result-header-text">PELAKU SENI / BUDAYA</div>
+              <div class="result-header-text">PELAKU SENI / PENDUKUNG</div>
               <div class="result-big-number" id="txtTotalPelaku">-</div>
               <div class="result-unit-label" id="txtUnitPelaku">(TIDAK DIHITUNG)</div>
               <div class="calc-proof-box">
@@ -272,7 +272,7 @@
     <footer class="app-footer">
       <div class="footer-aksara">꧁ ꦠꦏꦂꦧꦸꦢꦪ ꧂</div>
       <p>Takar Budaya &copy; 2026 &bull; Tata Kalkulasi Partisipasi Budaya.</p>
-      <p class="footer-sub">Instrumen Penghitungan Penonton (Metode Jacobs) &amp; Pelaku Seni / Kebudayaan.</p>
+      <p class="footer-sub">Instrumen Penghitungan Penonton (Metode Jacobs) &amp; Pelaku Seni / Pendukung.</p>
     </footer>
   </div>
 
@@ -282,8 +282,8 @@
   <div id="printSheet" class="print-only">
     <div class="pdf-header">
       <div class="pdf-title">TAKAR BUDAYA</div>
-      <div class="pdf-subtitle">Penonton Pertunjukan Seni / Kebudayaan &amp; Pelaku / Pendukung Pertunjukan Seni</div>
-      <div class="pdf-meta-method" id="pdfMetaMethod">Metode Ilmiah: Herbert Jacobs (1967) &bull; Kategori Peran Pelaku Seni</div>
+      <div class="pdf-subtitle">Penonton &amp; Pelaku Seni / Pendukung</div>
+      <div class="pdf-meta-method" id="pdfMetaMethod">Metode Ilmiah: Herbert Jacobs (1967) &bull; Kategori Peran Pelaku Seni / Pendukung</div>
       <div class="pdf-divider"></div>
     </div>
 
@@ -300,7 +300,7 @@
         <td id="pdfTempatAcara">-</td>
       </tr>
       <tr>
-        <td><strong>Nama Acara Budaya</strong></td>
+        <td><strong>Acara</strong></td>
         <td>:</td>
         <td id="pdfNamaAcara">-</td>
       </tr>
@@ -321,8 +321,8 @@
 
     <div class="pdf-footer-note">
       <div><strong>Rujukan Metodologi:</strong></div>
-      <div>1. Estimasi Penonton (Metode Jacobs): Herbert Jacobs (1967), <em>To Count a Crowd</em>, UC Berkeley (Rumus: P = A &times; D).</div>
-      <div>2. Penghitungan Pelaku Seni: Akumulasi Pemeran Utama, Pemain Pendukung, dan Pemusik.</div>
+      <div>1. Penonton (Metode Jacobs): Herbert Jacobs (1967), <em>To Count a Crowd</em>, UC Berkeley (Rumus: P = A &times; D).</div>
+      <div>2. Penghitungan Pelaku Seni / Pendukung: Akumulasi Pemeran Utama, Pemain Pendukung, dan Pemusik.</div>
       <div style="margin-top: 4pt; color: #555555; font-size: 8.5pt;">Dokumen ini merupakan hasil ekspor instrumen bantu kalkulator <strong>Takar Budaya</strong>.</div>
     </div>
   </div>

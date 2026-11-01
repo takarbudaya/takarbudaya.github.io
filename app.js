@@ -2,7 +2,7 @@
  * TAKAR BUDAYA - Tata Kalkulasi Partisipasi Budaya
  * Terintegrasi dalam 1 Halaman (Masing-masing berdiri sendiri):
  * 1. Hitung Penonton (Metode Herbert Jacobs: P = A x D)
- * 2. Hitung Pelaku Seni / Kebudayaan (Akumulasi: Pemeran Utama, Pendukung, Pemusik)
+ * 2. Hitung Pelaku Seni / Pendukung (Akumulasi: Pemeran Utama, Pendukung, Pemusik)
  * Catatan: Keduanya fleksibel dan bisa dikosongi jika tidak ada.
  */
 
@@ -32,7 +32,7 @@
     densityDesc: 'Kondisi normal wajar, penonton leluasa tanpa berdesakan',
     totalPenonton: null, // null = tidak dihitung
 
-    // --- BAGIAN 2: HITUNG PELAKU SENI / KEBUDAYAAN ---
+    // --- BAGIAN 2: HITUNG PELAKU SENI / PENDUKUNG ---
     totalPelakuSeni: null // null = tidak dihitung
   };
 
@@ -285,7 +285,7 @@
     }
   }
 
-  // --- KONTROL HITUNG PELAKU SENI / KEBUDAYAAN (INPUT KETIK SENDIRI) ---
+  // --- KONTROL HITUNG PELAKU SENI / PENDUKUNG (INPUT KETIK SENDIRI) ---
   function bindPelakuControls() {
     const inputPelaku = el('inputPelakuSeni');
     const btnMinus = el('btnPelakuMinus');
@@ -354,7 +354,7 @@
       if (txtFormulaProofEl) txtFormulaProofEl.textContent = 'Penonton tidak dihitung / tidak ada';
     }
 
-    // 2. Pelaku Seni / Kebudayaan
+    // 2. Pelaku Seni / Pendukung
     const txtTotalPelakuEl = el('txtTotalPelaku');
     const txtUnitPelakuEl = el('txtUnitPelaku');
     const txtDescPelakuEl = el('txtDescPelaku');
@@ -395,14 +395,14 @@
       const strD = state.density.toString().replace('.', ',');
       const strTotalPenonton = formatIDRNumber(state.totalPenonton);
       blokPenonton =
-`🌳 *I. ESTIMASI PENONTON (Metode Jacobs: P = A × D)*
+`🌳 *I. PENONTON (Metode Jacobs: P = A × D)*
 • Luas Area Efektif (A) : ${strA} m²
 • Kepadatan Penonton (D): ${strD} orang/m² (${state.densityTitle})
 • Perhitungan Rumus     : ${strA} m² × ${strD} = *${strTotalPenonton} Orang*
 👉 *Estimasi Jumlah Penonton Pertunjukan Seni / Kebudayaan: ${strTotalPenonton} Orang*`;
     } else {
       blokPenonton =
-`🌳 *I. ESTIMASI PENONTON (Metode Jacobs: P = A × D)*
+`🌳 *I. PENONTON (Metode Jacobs: P = A × D)*
 👉 *Estimasi Jumlah Penonton Pertunjukan Seni / Kebudayaan: - *`;
     }
 
@@ -411,17 +411,17 @@
     if (state.totalPelakuSeni !== null) {
       const strTotalPelaku = formatIDRNumber(state.totalPelakuSeni);
       blokPelaku =
-`🎭 *II. PELAKU SENI / KEBUDAYAAN*
+`🎭 *II. PELAKU SENI / PENDUKUNG*
 • Komposisi Peran: Pemeran Utama, Pemain Pendukung, dan Pemusik
-👉 *Estimasi Jumlah Pelaku / Pendukung Pertunjukan Seni: ${strTotalPelaku} Orang*`;
+👉 *Jumlah Pelaku / Pendukung Pertunjukan Seni: ${strTotalPelaku} Orang*`;
     } else {
       blokPelaku =
-`🎭 *II. PELAKU SENI / KEBUDAYAAN*
-👉 *Estimasi Jumlah Pelaku / Pendukung Pertunjukan Seni: - *`;
+`🎭 *II. PELAKU SENI / PENDUKUNG*
+👉 *Jumlah Pelaku / Pendukung Pertunjukan Seni: - *`;
     }
 
     const waText =
-`*LAPORAN PENGHITUNGAN PENONTON & PELAKU SENI / KEBUDAYAAN*
+`*LAPORAN PENGHITUNGAN PENONTON & PELAKU SENI / PENDUKUNG*
 🏛️ *TAKAR BUDAYA*
 ---------------------------------------------
 📅 *Tanggal:* ${strTgl}
@@ -492,7 +492,7 @@ _Dihitung melalui instrumen bantu Takar Budaya._`;
       const strTotalPenonton = formatIDRNumber(state.totalPenonton);
 
       sectionPenontonHtml = `
-        <div class="pdf-section-title">I. ESTIMASI PENONTON &mdash; METODE HERBERT JACOBS (P = A &times; D)</div>
+        <div class="pdf-section-title">I. PENONTON &mdash; METODE HERBERT JACOBS (P = A &times; D)</div>
         <table class="pdf-table-data">
           <thead>
             <tr>
@@ -532,7 +532,7 @@ _Dihitung melalui instrumen bantu Takar Budaya._`;
       `;
     } else {
       sectionPenontonHtml = `
-        <div class="pdf-section-title">I. ESTIMASI PENONTON &mdash; METODE HERBERT JACOBS (P = A &times; D)</div>
+        <div class="pdf-section-title">I. PENONTON &mdash; METODE HERBERT JACOBS (P = A &times; D)</div>
         <table class="pdf-table-data">
           <tbody>
             <tr>
@@ -557,7 +557,7 @@ _Dihitung melalui instrumen bantu Takar Budaya._`;
       const strTotalPelaku = formatIDRNumber(state.totalPelakuSeni);
 
       sectionPelakuHtml = `
-        <div class="pdf-section-title">II. PELAKU SENI / KEBUDAYAAN &mdash; KATEGORI PERAN (CLUSTERING)</div>
+        <div class="pdf-section-title">II. PELAKU SENI / PENDUKUNG &mdash; KATEGORI PERAN (CLUSTERING)</div>
         <table class="pdf-table-data">
           <thead>
             <tr>
@@ -578,26 +578,26 @@ _Dihitung melalui instrumen bantu Takar Budaya._`;
         </table>
         <div class="pdf-result-card">
           <div class="pdf-banner-total" style="border-top: none; padding-top: 0;">
-            <span>Estimasi Jumlah Pelaku / Pendukung Pertunjukan Seni:</span>
+            <span>Jumlah Pelaku / Pendukung Pertunjukan Seni:</span>
             <strong>${strTotalPelaku} ORANG</strong>
           </div>
         </div>
       `;
     } else {
       sectionPelakuHtml = `
-        <div class="pdf-section-title">II. PELAKU SENI / KEBUDAYAAN &mdash; KATEGORI PERAN (CLUSTERING)</div>
+        <div class="pdf-section-title">II. PELAKU SENI / PENDUKUNG &mdash; KATEGORI PERAN (CLUSTERING)</div>
         <table class="pdf-table-data">
           <tbody>
             <tr>
               <td style="padding: 10pt; color: #555555; font-style: italic;">
-                Pelaku seni / kebudayaan tidak dihitung pada kegiatan ini (misalnya acara pameran umum atau kegiatan tanpa pementasan seniman).
+                Pelaku seni / pendukung tidak dihitung pada kegiatan ini (misalnya acara pameran umum atau kegiatan tanpa pementasan seniman).
               </td>
             </tr>
           </tbody>
         </table>
         <div class="pdf-result-card">
           <div class="pdf-banner-total" style="border-top: none; padding-top: 0;">
-            <span>Estimasi Jumlah Pelaku / Pendukung Pertunjukan Seni:</span>
+            <span>Jumlah Pelaku / Pendukung Pertunjukan Seni:</span>
             <strong style="color: #666666;">-</strong>
           </div>
         </div>
