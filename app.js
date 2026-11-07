@@ -78,6 +78,23 @@
     recalculateAll();
   }
 
+  // Format tampilan tanggal input ke urutan DD/MM/YYYY (Tanggal/Bulan/Tahun)
+  function updateDateDisplay(val) {
+    const display = el('tglAcaraDisplay');
+    if (!display) return;
+    if (!val) {
+      display.value = '';
+      return;
+    }
+    const parts = val.split('-');
+    if (parts.length === 3) {
+      const [yyyy, mm, dd] = parts;
+      display.value = `${dd}/${mm}/${yyyy}`;
+    } else {
+      display.value = val;
+    }
+  }
+
   // Set default tanggal hari ini
   function initDefaultDate() {
     const inputTgl = el('tglAcara');
@@ -89,12 +106,14 @@
       const todayStr = `${yyyy}-${mm}-${dd}`;
       inputTgl.value = todayStr;
       state.tglAcara = todayStr;
+      updateDateDisplay(todayStr);
     }
   }
 
   // Bind input tanggal, tempat, acara, penyelenggara, bidang pelaksana
   function bindEventInputs() {
     const inputTgl = el('tglAcara');
+    const displayTgl = el('tglAcaraDisplay');
     const inputTempat = el('tempatAcara');
     const inputNama = el('namaAcara');
     const inputPenyelenggara = el('penyelenggaraAcara');
@@ -116,7 +135,16 @@
 
       inputTgl.addEventListener('change', (e) => {
         state.tglAcara = e.target.value;
+        updateDateDisplay(e.target.value);
       });
+      inputTgl.addEventListener('input', (e) => {
+        state.tglAcara = e.target.value;
+        updateDateDisplay(e.target.value);
+      });
+
+      if (displayTgl) {
+        displayTgl.addEventListener('click', openDatePicker);
+      }
     }
 
     if (inputTempat) {

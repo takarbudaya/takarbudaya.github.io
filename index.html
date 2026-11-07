@@ -46,7 +46,11 @@
         <div class="form-grid-identitas">
           <div class="field-item">
             <label for="tglAcara">Tanggal</label>
-            <input type="date" id="tglAcara" class="text-input">
+            <div class="date-input-wrapper">
+              <input type="text" id="tglAcaraDisplay" class="text-input date-display-input" placeholder="dd/mm/yyyy" readonly>
+              <input type="date" id="tglAcara" class="date-picker-overlay" aria-label="Pilih tanggal">
+              <span class="calendar-icon">📅</span>
+            </div>
           </div>
           <div class="field-item">
             <label for="tempatAcara">Tempat / Lokasi</label>
