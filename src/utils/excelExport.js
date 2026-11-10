@@ -301,6 +301,9 @@ export function buildWorkbook(ExcelJS, rows) {
   wb.created = new Date();
   wb.calcProperties = { fullCalcOnLoad: true };
 
+  // Urut tanggal acara (lama -> baru); tanggal sama diurutkan sesuai urutan input (id).
+  rows = [...rows].sort((a, b) => String(a.tgl_acara).localeCompare(String(b.tgl_acara)) || a.id - b.id);
+
   const groups = BIDANG_OPTIONS.map((b) => [b, rows.filter((r) => r.bidang === b)]).filter(([, g]) => g.length);
   // Bidang di luar daftar (tidak semestinya terjadi; dijaga CHECK constraint) tetap diexport.
   const others = [...new Set(rows.map((r) => r.bidang).filter((b) => !BIDANG_OPTIONS.includes(b)))];
