@@ -122,13 +122,13 @@ function addBidangSheet(wb, bidang, rows) {
   headerCell(ws, 'A4', 'No.');
   headerCell(ws, 'B4', 'Nama Kegiatan/Acara');
   headerCell(ws, 'C4', 'Kegiatan Internal Dinas');
-  headerCell(ws, 'E4', 'Kegiatan Berdasarkan Undangan dari Luar Dinas');
-  headerCell(ws, 'C5', 'Estimasi Jumlah Pengunjung Usia >10 Tahun (Orang)');
-  headerCell(ws, 'D5', 'Estimasi Jumlah Seniman yang Terlibat (Orang)');
-  headerCell(ws, 'E5', 'Estimasi Jumlah Pengunjung Usia >10 Tahun (Orang)');
-  headerCell(ws, 'F5', 'Estimasi Jumlah Seniman yang Terlibat (Orang)');
-  ws.getRow(4).height = 33; // 2 baris: judul E4:F4 cukup panjang
-  ws.getRow(5).height = 44.5;
+  headerCell(ws, 'E4', 'Acara Eksternal Dinas');
+  headerCell(ws, 'C5', 'Estimasi Jumlah Penonton Pertunjukan Seni/Kebudayaan (Orang)');
+  headerCell(ws, 'D5', 'Jumlah Pelaku/Pendukung Pertunjukan Seni/Budaya (Orang)');
+  headerCell(ws, 'E5', 'Estimasi Jumlah Penonton Pertunjukan Seni/Kebudayaan (Orang)');
+  headerCell(ws, 'F5', 'Jumlah Pelaku/Pendukung Pertunjukan Seni/Budaya (Orang)');
+  ws.getRow(4).height = 20; // judul kelompok muat 1 baris
+  ws.getRow(5).height = 80; // judul kolom C–F terbungkus hingga 5 baris
   for (const range of ['A4:A5', 'B4:B5', 'C4:D4', 'E4:F4', 'C5', 'D5', 'E5', 'F5']) {
     setBorder(ws, range, { top: thick, bottom: thick });
   }
@@ -230,12 +230,12 @@ function addRekapSheet(wb, sheets, allRows) {
   headerCell(ws, 'B4', 'Bidang / UPTD');
   headerCell(ws, 'C4', 'Jumlah Kegiatan');
   headerCell(ws, 'D4', 'Kegiatan Internal Dinas');
-  headerCell(ws, 'F4', 'Kegiatan Berdasarkan Undangan dari Luar Dinas');
+  headerCell(ws, 'F4', 'Acara Eksternal Dinas');
   headerCell(ws, 'H4', 'Total');
-  for (const col of ['D', 'F', 'H']) headerCell(ws, `${col}5`, 'Pengunjung Usia >10 Tahun (Orang)');
-  for (const col of ['E', 'G', 'I']) headerCell(ws, `${col}5`, 'Seniman yang Terlibat (Orang)');
-  ws.getRow(4).height = 36; // 2 baris untuk "Kegiatan Berdasarkan Undangan dari Luar Dinas"
-  ws.getRow(5).height = 44.5;
+  for (const col of ['D', 'F', 'H']) headerCell(ws, `${col}5`, 'Penonton Pertunjukan Seni/Kebudayaan (Orang)');
+  for (const col of ['E', 'G', 'I']) headerCell(ws, `${col}5`, 'Pelaku/Pendukung Pertunjukan Seni/Budaya (Orang)');
+  ws.getRow(4).height = 20; // judul kelompok muat 1 baris
+  ws.getRow(5).height = 64; // judul kolom D–I terbungkus hingga 4 baris
   for (const range of ['A4:A5', 'B4:B5', 'C4:C5', 'D4:E4', 'F4:G4', 'H4:I4', 'D5', 'E5', 'F5', 'G5', 'H5', 'I5']) {
     setBorder(ws, range, { top: thick, bottom: thick });
   }
