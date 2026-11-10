@@ -4,16 +4,15 @@ import { useTakarStore } from '../composables/useTakarStore.js';
 import { QUICK_AREAS } from '../data/options.js';
 import { formatIDRNumber } from '../utils/format.js';
 
-const { state, activeArea, strA, toggleArea, setCustomSubMode, isFieldInvalid } = useTakarStore();
+const { state, activeArea, strA, toggleArea, setCustomSubMode } = useTakarStore();
 
 const isQuickActive = (val) => state.areaMode === 'quick' && state.quickAreaVal === val;
 </script>
 
 <template>
-  <section id="luasArea" class="form-card" :class="{ 'is-invalid': isFieldInvalid('luasArea') }">
+  <section id="luasArea" class="form-card">
     <CardTitle
       badge="A"
-      required
       title="Luas Area Penonton (A)"
       desc="Pilih ukuran cepat atau masukkan ukuran luas area efektif"
     />
@@ -109,8 +108,5 @@ const isQuickActive = (val) => state.areaMode === 'quick' && state.quickAreaVal 
       <span>Luas Lokasi Terhitung (A):</span>
       <strong>{{ activeArea !== null ? `${strA} m²` : 'Tidak dihitung / belum diisi' }}</strong>
     </div>
-    <p v-if="isFieldInvalid('luasArea')" class="field-error">
-      Luas area wajib diisi untuk menyimpan data. Pilih ukuran cepat atau ketik sendiri.
-    </p>
   </section>
 </template>

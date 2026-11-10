@@ -101,8 +101,7 @@ const REQUIRED_FIELDS = [
   { key: 'namaAcara', label: 'Acara', filled: () => state.namaAcara.trim() !== '' },
   { key: 'penyelenggaraAcara', label: 'Penyelenggara', filled: () => state.penyelenggaraAcara.trim() !== '' },
   { key: 'bidangPelaksana', label: 'Bidang / UPTD', filled: () => BIDANG_OPTIONS.includes(state.bidangPelaksana) },
-  { key: 'acaraInternal', label: 'Acara Internal', filled: () => typeof state.acaraInternal === 'boolean' },
-  { key: 'luasArea', label: 'Luas Area', filled: () => activeArea.value !== null && activeArea.value > 0 }
+  { key: 'acaraInternal', label: 'Acara Internal', filled: () => typeof state.acaraInternal === 'boolean' }
 ];
 
 /** Daftar isian wajib yang masih kosong, urut sesuai form. */
@@ -117,8 +116,12 @@ function isFieldInvalid(key) {
   return validationShown.value && missingFields.value.some((f) => f.key === key);
 }
 
-/** Baris untuk tabel public.laporan_takar (total_penonton dihitung database). */
+/**
+ * Baris untuk tabel public.laporan_takar (total_penonton dihitung database).
+ * Luas area boleh kosong: luas_mode, panjang, lebar, luas_area semuanya null.
+ */
 function toRecord() {
+  const mode = activeArea.value !== null ? luasMode.value : null;
   return {
     tgl_acara: state.tglAcara,
     tempat_acara: state.tempatAcara.trim(),
@@ -126,9 +129,9 @@ function toRecord() {
     penyelenggara: state.penyelenggaraAcara.trim(),
     bidang: state.bidangPelaksana,
     acara_internal: state.acaraInternal,
-    luas_mode: luasMode.value,
-    panjang: luasMode.value === 'panjang_lebar' ? panjang.value : null,
-    lebar: luasMode.value === 'panjang_lebar' ? lebar.value : null,
+    luas_mode: mode,
+    panjang: mode === 'panjang_lebar' ? panjang.value : null,
+    lebar: mode === 'panjang_lebar' ? lebar.value : null,
     luas_area: activeArea.value,
     kepadatan: state.density,
     total_pelaku: totalPelakuSeni.value
