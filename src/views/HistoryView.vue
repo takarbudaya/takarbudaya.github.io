@@ -618,7 +618,7 @@ function rowNumber(index) {
                 </span>
               </td>
               <td class="col-num cell-nowrap" :title="LUAS_MODE_LABEL[row.luas_mode]">
-                {{ formatIDRNumber(row.luas_area) }} m&sup2;
+                {{ row.luas_area != null ? `${formatIDRNumber(row.luas_area)} m²` : '-' }}
                 <small v-if="luasDimensi(row)" class="cell-sub">{{ luasDimensi(row) }}</small>
               </td>
               <td class="col-num cell-nowrap">{{ formatDecimalID(Number(row.kepadatan)) }} org/m&sup2;</td>
