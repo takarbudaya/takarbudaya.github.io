@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import KalkulatorView from '../views/KalkulatorView.vue';
 import { useTakarStore } from '../composables/useTakarStore.js';
+import { useAuth } from '../composables/useAuth.js';
 import { parseId } from '../utils/format.js';
 
 const APP_NAME = 'TAKAR BUDAYA';
@@ -18,6 +19,13 @@ const routes = [
     component: () => import('../views/HistoryView.vue'),
     meta: { title: `Riwayat - ${APP_NAME}` }
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/LoginView.vue'),
+    // Satu-satunya halaman yang boleh dibuka tanpa login.
+    meta: { title: `Masuk - ${APP_NAME}`, public: true }
+  },
   // Halaman baru: tambahkan di sini dengan import() (lazy) agar bundle awal tetap kecil.
 
   // URL tidak dikenal -> kembali ke beranda
@@ -33,6 +41,24 @@ const router = createRouter({
     if (to.hash) return { el: to.hash, behavior: 'smooth' };
     return { top: 0 };
   }
+});
+
+/**
+ * Wajib login: halaman selain /login dialihkan ke /login (lalu kembali ke tujuan semula).
+ * Database juga menolak permintaan tanpa login, jadi ini bukan satu-satunya pengaman.
+ */
+router.beforeEach(async (to) => {
+  const { isLoggedIn, ensureAuthReady } = useAuth();
+  try {
+    await ensureAuthReady();
+  } catch {
+    // SDK / server tidak bisa dijangkau: anggap belum login.
+  }
+  if (to.meta.public) {
+    return to.name === 'login' && isLoggedIn.value ? { name: 'kalkulator' } : true;
+  }
+  if (isLoggedIn.value) return true;
+  return to.fullPath === '/' ? { name: 'login' } : { name: 'login', query: { redirect: to.fullPath } };
 });
 
 /**

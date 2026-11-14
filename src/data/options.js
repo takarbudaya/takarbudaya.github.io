@@ -1,5 +1,5 @@
 /** Tombol cepat luas area (m²). */
-export const QUICK_AREAS = [300, 500, 700, 1000];
+export const QUICK_AREAS = [100, 300, 500, 700, 1000];
 
 /** Pilihan kepadatan penonton (D) dalam orang per m². */
 export const DENSITY_OPTIONS = [
@@ -15,8 +15,8 @@ export const DENSITY_OPTIONS = [
   },
   {
     value: 2.0,
-    title: 'Berdiri Berdekatan',
-    note: 'Berdiri berdekatan sejangkauan tangan, tanpa desak-desakan.'
+    title: 'Cukup Padat',
+    note: 'Berdiri berdekatan.'
   },
   {
     value: 3.0,

@@ -1,42 +1,17 @@
 /**
  * Akses data riwayat laporan di Supabase (tabel public.laporan_takar).
- * SDK Supabase dimuat lazy, jadi halaman kalkulator tetap ringan sampai
- * pengguna menyimpan atau membuka halaman riwayat.
+ * Semua permintaan memakai sesi login (lihat useAuth.js); tanpa login, database menolak.
  */
+import { getClient, isNetworkError } from './supabase.js';
+
+export { isSupabaseConfigured } from './supabase.js';
+
 const TABLE = 'laporan_takar';
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-
-export const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_KEY);
-
-const NOT_CONFIGURED_MESSAGE =
-  'Penyimpanan belum dikonfigurasi (VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY kosong).';
-
-let clientPromise = null;
-
-function getClient() {
-  if (!isSupabaseConfigured) {
-    return Promise.reject(new Error(NOT_CONFIGURED_MESSAGE));
-  }
-  clientPromise ??= import('@supabase/supabase-js')
-    .then(({ createClient }) =>
-      createClient(SUPABASE_URL, SUPABASE_KEY, {
-        // Tanpa login: tidak perlu menyimpan / memperbarui sesi auth.
-        auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
-      })
-    )
-    .catch((err) => {
-      clientPromise = null; // izinkan coba lagi (mis. gagal memuat chunk saat offline)
-      throw err;
-    });
-  return clientPromise;
-}
 
 /** Ubah error Supabase / jaringan jadi pesan yang bisa dibaca pengguna. */
 function toUserError(error, action) {
   const raw = error?.message ?? String(error);
-  const offline = /failed to fetch|networkerror|load failed|network request failed/i.test(raw);
+  const offline = isNetworkError(raw);
   const err = new Error(
     offline
       ? `Gagal ${action}: tidak dapat terhubung ke server. Periksa koneksi internet.`

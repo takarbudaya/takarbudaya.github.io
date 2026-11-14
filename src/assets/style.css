@@ -34,6 +34,142 @@
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-heritage: 'Cinzel', serif;
+
+  /* Permukaan tambahan (kotak dalam, tombol, kartu hasil) */
+  --bg-sunken: #18100a;
+  --bg-deep: #110b06;
+  --bg-raised: #20140c;
+  --bg-raised-strong: #25180f;
+  --bg-selected: #2b1c11;
+  --bg-result: #1f140c;
+  --bg-toast: #241a10;
+
+  --text-strong: #f7f1e6;            /* Angka hasil besar */
+  --text-faint: #635345;
+  --on-gold: #130d08;                /* Teks di atas latar emas */
+
+  --success-bg: #173824;
+  --success-border: #287a4c;
+  --success-text: #d1fae5;
+  --success-icon: #5cc28a;
+  --danger-text: #f6d5cc;
+  --print-icon: #d9a066;
+  --backdrop: rgba(8, 5, 3, 0.72);
+  --watermark-opacity: 0.025;
+
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23cf9e5f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --date-icon-filter: invert(0.8) sepia(0.3) saturate(3) hue-rotate(350deg);
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   MODE TERANG (Kertas Gading & Sogan) - diaktifkan lewat <html data-theme="light">
+   ========================================================================== */
+:root[data-theme="light"] {
+  --bg-main: #f3ebdf;
+  --bg-card: #fbf7f0;
+  --bg-card-hover: #f4ecdf;
+  --bg-card-active: #f0e3cd;
+  --bg-input: #fffcf7;
+
+  --gold-prada: #95662b;
+  --gold-light: #84561c;
+  --gold-subtle: rgba(149, 102, 43, 0.12);
+
+  --text-main: #2a1d12;
+  --text-muted: #67503e;
+  --text-dim: #8a7561;
+
+  --border-subtle: rgba(149, 102, 43, 0.28);
+  --border-active: #95662b;
+
+  --bg-sunken: #f8f1e6;
+  --bg-deep: #fffcf7;
+  --bg-raised: #f2e8d8;
+  --bg-raised-strong: #ede0ca;
+  --bg-selected: #ead8b9;
+  --bg-result: #fcf6ec;
+  --bg-toast: #f6ecdc;
+
+  --text-strong: #1f140b;
+  --text-faint: #9a8573;
+  --on-gold: #fffaf2;
+
+  --danger: #b0472f;
+  --danger-bg: #fbe9e4;
+  --danger-border: rgba(176, 71, 47, 0.5);
+  --danger-text: #7a2a1a;
+
+  --success-bg: #e3f3e8;
+  --success-border: #5aa77a;
+  --success-text: #17532f;
+  --success-icon: #23824d;
+  --print-icon: #9a5f22;
+  --backdrop: rgba(42, 29, 18, 0.45);
+  --watermark-opacity: 0.07;
+
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2384561c' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --date-icon-filter: sepia(1) saturate(2.5) hue-rotate(-15deg) brightness(0.8);
+
+  color-scheme: light;
+}
+
+/* Pojok kanan atas: mode gelap / terang, lalu pengguna login + tombol keluar */
+.top-bar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100% - 32px);
+}
+
+/* Layar sempit: satu baris sendiri di atas header agar tidak menimpa judul */
+@media (max-width: 720px) {
+  .top-bar {
+    position: static;
+    justify-content: flex-end;
+    max-width: none;
+    margin: -8px 0 14px;
+  }
+}
+
+/* Tombol ganti mode gelap / terang */
+.theme-toggle {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  color: var(--gold-light);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--gold-prada);
+  background: var(--bg-raised-strong);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--gold-prada);
+  outline-offset: 2px;
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* Reset Dasar */
@@ -70,16 +206,16 @@ button, input, select, textarea, .select-card, .quick-btn, .counter-btn {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: #130d08;
+  background: var(--bg-main);
 }
 
 /* Ornamen Batik Kawung Halus & Samar di Latar */
 .kawung-watermark {
   position: absolute;
   inset: 0;
-  opacity: 0.025;
-  background-image: radial-gradient(circle at center, #cf9e5f 1px, transparent 1px),
-                    radial-gradient(circle at center, #cf9e5f 1px, transparent 1px);
+  opacity: var(--watermark-opacity);
+  background-image: radial-gradient(circle at center, var(--gold-light) 1px, transparent 1px),
+                    radial-gradient(circle at center, var(--gold-light) 1px, transparent 1px);
   background-size: 32px 32px;
   background-position: 0 0, 16px 16px;
 }
@@ -150,7 +286,7 @@ button, input, select, textarea, .select-card, .quick-btn, .counter-btn {
 
 .formula-tag {
   display: inline-block;
-  background: #18100a;
+  background: var(--bg-sunken);
   border: 1px solid var(--border-subtle);
   padding: 4px 14px;
   border-radius: var(--radius-full);
@@ -193,7 +329,7 @@ button, input, select, textarea, .select-card, .quick-btn, .counter-btn {
   width: 26px;
   height: 26px;
   border-radius: var(--radius-full);
-  background: #25180f;
+  background: var(--bg-raised-strong);
   border: 1px solid var(--gold-prada);
   color: var(--gold-light);
   font-weight: 700;
@@ -315,7 +451,7 @@ input[type="date"].text-input {
 
 input[type="date"].text-input::-webkit-calendar-picker-indicator {
   cursor: pointer;
-  filter: invert(0.8) sepia(0.3) saturate(3) hue-rotate(350deg);
+  filter: var(--date-icon-filter);
   opacity: 0.85;
 }
 
@@ -331,9 +467,16 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   margin-bottom: 12px;
 }
 
+/* 6 tombol (5 luas + Ketik Sendiri): HP 2 x 3, tablet 3 x 2, layar lebar 1 baris */
 @media (min-width: 480px) {
   .quick-buttons-row {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 760px) {
+  .quick-buttons-row {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
@@ -358,7 +501,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 }
 
 .quick-btn.active {
-  background: #2b1c11;
+  background: var(--bg-selected);
   border-color: var(--gold-prada);
   color: var(--gold-light);
   font-weight: 700;
@@ -367,7 +510,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 /* Kotak Input Kustom Luas */
 .custom-area-box {
   display: none;
-  background: #170f09;
+  background: var(--bg-sunken);
   border: 1px dashed var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 12px;
@@ -382,7 +525,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 
 .sub-tab {
   flex: 1;
-  background: #20140c;
+  background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
   padding: 6px 8px;
   border-radius: var(--radius-sm);
@@ -394,7 +537,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 
 .sub-tab.active {
   background: var(--gold-prada);
-  color: #130d08;
+  color: var(--on-gold);
   border-color: var(--gold-prada);
   font-weight: 700;
 }
@@ -418,7 +561,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #160e08;
+  background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   padding: 8px 12px;
   border-radius: var(--radius-sm);
@@ -445,7 +588,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: #18100a;
+  background: var(--bg-sunken);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 10px 13px;
@@ -486,7 +629,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   width: 5px;
   height: 5px;
   border-radius: var(--radius-full);
-  background: #130d08;
+  background: var(--on-gold);
 }
 
 .select-body {
@@ -514,7 +657,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 
 .val-pill {
   display: inline-block;
-  background: #20140b;
+  background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
   color: var(--gold-light);
   font-size: 11px;
@@ -525,7 +668,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 }
 
 .select-card.active .val-pill {
-  background: #2e1d11;
+  background: var(--bg-selected);
   border-color: var(--gold-prada);
   color: var(--gold-light);
 }
@@ -551,14 +694,14 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--gold-light);
-  background: #1c130b;
+  background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   padding: 6px 14px;
   border-radius: var(--radius-full);
 }
 
 .pelaku-input-wrap {
-  background: #160e08;
+  background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 16px 14px;
@@ -578,7 +721,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #110b06;
+  background: var(--bg-deep);
   border: 1.5px solid var(--border-active);
   border-radius: var(--radius-md);
   padding: 4px;
@@ -592,7 +735,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   height: 44px;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(168, 122, 64, 0.3);
-  background: #23170e;
+  background: var(--bg-raised-strong);
   color: var(--gold-light);
   font-size: 22px;
   font-weight: 700;
@@ -607,7 +750,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 
 .counter-btn:hover {
   background: var(--gold-prada);
-  color: #130d08;
+  color: var(--on-gold);
   border-color: var(--gold-prada);
   transform: translateY(-1px);
 }
@@ -629,7 +772,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   width: 75px;
   background: transparent;
   border: none;
-  color: #f7f2ea;
+  color: var(--text-strong);
   font-family: var(--font-heritage);
   font-size: 28px;
   font-weight: 700;
@@ -676,7 +819,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 }
 
 .result-sub-box {
-  background: #18100a;
+  background: var(--bg-sunken);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 10px 10px;
@@ -711,7 +854,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   position: sticky;
   bottom: 12px;
   z-index: 10;
-  background: #1f140c;
+  background: var(--bg-result);
   border: 1px solid var(--gold-prada);
   border-radius: var(--radius-md);
   padding: 16px 14px;
@@ -734,7 +877,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   font-family: var(--font-heritage);
   font-size: 40px;
   font-weight: 700;
-  color: #f7f1e6;
+  color: var(--text-strong);
   line-height: 1.1;
   letter-spacing: 1px;
 }
@@ -749,7 +892,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 
 /* Kotak Pembuktian Rumus */
 .calc-proof-box {
-  background: #160e08;
+  background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 7px 10px;
@@ -819,9 +962,9 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 /* Toast Notifikasi Salin */
 .toast-box {
   margin-top: 10px;
-  background: #173824;
-  border: 1px solid #287a4c;
-  color: #d1fae5;
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
+  color: var(--success-text);
   padding: 7px 12px;
   border-radius: var(--radius-sm);
   font-size: 12px;
@@ -847,7 +990,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 .footer-sub {
   font-size: 10.5px;
   margin-top: 3px;
-  color: #635345;
+  color: var(--text-faint);
 }
 
 /* ==========================================================================
@@ -1014,7 +1157,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 .app-nav-link {
   flex: 0 1 160px;
   text-align: center;
-  background: #20140c;
+  background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
   padding: 8px 12px;
   border-radius: var(--radius-full);
@@ -1033,7 +1176,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 .app-nav-link.active {
   background: var(--gold-prada);
   border-color: var(--gold-prada);
-  color: #130d08;
+  color: var(--on-gold);
   font-weight: 700;
 }
 
@@ -1064,7 +1207,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
   -webkit-appearance: none;
   cursor: pointer;
   padding-right: 34px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23cf9e5f' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: var(--select-arrow);
   background-repeat: no-repeat;
   background-position: right 12px center;
 }
@@ -1082,7 +1225,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 .btn-save {
   grid-column: 1 / -1;
   background: var(--gold-prada);
-  color: #130d08;
+  color: var(--on-gold);
 }
 
 .btn-save:hover {
@@ -1096,7 +1239,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 
 /* Varian toast */
 .toast-info {
-  background: #241a10;
+  background: var(--bg-toast);
   border-color: var(--border-active);
   color: var(--text-main);
 }
@@ -1104,7 +1247,7 @@ input[type="date"].text-input::-webkit-calendar-picker-indicator:hover {
 .toast-error {
   background: var(--danger-bg);
   border-color: var(--danger-border);
-  color: #f6d5cc;
+  color: var(--danger-text);
 }
 
 .toast-link {
@@ -1221,8 +1364,8 @@ input[type="search"].text-input::-webkit-search-cancel-button {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   background:
-    linear-gradient(to right, var(--bg-card) 30%, rgba(28, 19, 11, 0)) left center / 40px 100% no-repeat local,
-    linear-gradient(to left, var(--bg-card) 30%, rgba(28, 19, 11, 0)) right center / 40px 100% no-repeat local,
+    linear-gradient(to right, var(--bg-card) 30%, transparent) left center / 40px 100% no-repeat local,
+    linear-gradient(to left, var(--bg-card) 30%, transparent) right center / 40px 100% no-repeat local,
     radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)) left center / 14px 100% no-repeat scroll,
     radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0)) right center / 14px 100% no-repeat scroll,
     var(--bg-card);
@@ -1251,7 +1394,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
 
 .history-table th {
   vertical-align: bottom;
-  background: #160e08;
+  background: var(--bg-input);
   color: var(--gold-light);
   font-size: 10.5px;
   font-weight: 700;
@@ -1310,7 +1453,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
   font-family: var(--font-heritage);
   font-size: 15px;
   font-weight: 700;
-  color: #f7f1e6;
+  color: var(--text-strong);
 }
 
 .cell-sub {
@@ -1333,7 +1476,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
   min-width: 36px;
   height: 36px;
   padding: 0 10px;
-  background: #20140c;
+  background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--text-muted);
@@ -1351,7 +1494,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
 .page-btn.active {
   background: var(--gold-prada);
   border-color: var(--gold-prada);
-  color: #130d08;
+  color: var(--on-gold);
   font-weight: 700;
 }
 
@@ -1465,7 +1608,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
 }
 
 .internal-tag.is-external {
-  background: #20140b;
+  background: var(--bg-raised);
   color: var(--text-muted);
 }
 
@@ -1500,7 +1643,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
 }
 
 .edit-banner.is-error .edit-banner-text strong:first-child {
-  color: #f6d5cc;
+  color: var(--danger-text);
 }
 
 .edit-banner-actions {
@@ -1521,7 +1664,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
 }
 
 .history-table th.col-action {
-  background: #160e08;
+  background: var(--bg-input);
 }
 
 .history-table tbody tr:hover td.col-action {
@@ -1538,7 +1681,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: #20140c;
+  background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   color: var(--gold-light);
@@ -1570,18 +1713,18 @@ input[type="search"].text-input::-webkit-search-cancel-button {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background: #173824;
-  border-color: #287a4c;
+  background: var(--success-bg);
+  border-color: var(--success-border);
 }
 
 .notice-success strong {
-  color: #d1fae5;
+  color: var(--success-text);
 }
 
 .notice-close {
   background: none;
   border: none;
-  color: #d1fae5;
+  color: var(--success-text);
   font-size: 14px;
   cursor: pointer;
   padding: 2px 4px;
@@ -1614,16 +1757,16 @@ input[type="search"].text-input::-webkit-search-cancel-button {
 }
 
 .icon-btn.is-wa {
-  color: #5cc28a;
+  color: var(--success-icon);
 }
 
 .icon-btn.is-wa:hover {
-  border-color: #287a4c;
-  background: #173824;
+  border-color: var(--success-border);
+  background: var(--success-bg);
 }
 
 .icon-btn.is-print {
-  color: #d9a066;
+  color: var(--print-icon);
 }
 
 /* Notifikasi melayang di bawah layar (halaman riwayat) */
@@ -1662,7 +1805,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
 }
 
 .confirm-dialog::backdrop {
-  background: rgba(8, 5, 3, 0.72);
+  background: var(--backdrop);
 }
 
 .confirm-dialog-body {
@@ -1714,7 +1857,7 @@ input[type="search"].text-input::-webkit-search-cancel-button {
 }
 
 .btn-secondary {
-  background: #20140c;
+  background: var(--bg-raised);
   border: 1px solid var(--border-subtle);
   color: var(--text-main);
 }
@@ -1834,4 +1977,101 @@ input[type="search"].text-input::-webkit-search-cancel-button {
   margin-left: 22px;
   font-size: 11.5px;
   color: var(--text-dim);
+}
+
+/* Halaman login */
+.login-card {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-form .field-error {
+  margin-top: 0;
+}
+
+.login-submit {
+  width: 100%;
+  padding: 11px 12px;
+  font-size: 13.5px;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field .text-input {
+  padding-right: 104px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--gold-light);
+  cursor: pointer;
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid var(--gold-prada);
+}
+
+/* Pengguna yang sedang login + tombol keluar (di .top-bar) */
+.session-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 38px;
+  padding: 0 4px 0 14px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.session-user {
+  min-width: 0;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.session-logout {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.session-logout:hover {
+  border-color: var(--danger-border);
+  color: var(--danger);
+}
+
+.session-logout:focus-visible {
+  outline: 2px solid var(--gold-prada);
+  outline-offset: 2px;
 }
